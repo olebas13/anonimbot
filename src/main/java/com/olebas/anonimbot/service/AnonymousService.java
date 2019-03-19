@@ -16,7 +16,7 @@ public final class AnonymousService {
         mAnonymouses = new HashSet<>();
     }
 
-    public boolean setUsetDisplayedName(User user, String name) {
+    public boolean setUserDisplayedName(User user, String name) {
         if (!isDisplayedNameTaken(name)) {
             mAnonymouses.stream().filter(a -> a.getUser().equals(user))
                     .forEach(a -> a.setDisplayedName(name));
