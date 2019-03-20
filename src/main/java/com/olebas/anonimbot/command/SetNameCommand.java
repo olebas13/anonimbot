@@ -39,7 +39,7 @@ public class SetNameCommand extends AnonymizerCommand {
 
         if (displayedName == null) {
             log.log(Level.getLevel(LogLevel.STRANGE.getValue()), "User {} is trying to set empty name",
-                    , user.getId());
+                    user.getId());
             message.setText("Вы должны использовать непустое имя");
             execute(absSender, message, user);
             return;
@@ -49,11 +49,27 @@ public class SetNameCommand extends AnonymizerCommand {
 
         if (mAnonymouses.setUserDisplayedName(user, displayedName)) {
             if (mAnonymouses.getDisplayedName(user) == null) {
-
+                log.info("User {} set a name '{}'", user.getId(), displayedName);
+                sb.append("Ваше отображаемое имя: '").append(displayedName)
+                        .append("'. Теперь Вы можете отправлять сообщения боту!");
+            } else {
+                log.info("User {} has changed name to '{}'", user.getId(), displayedName);
+                sb.append("Ваше новое отображаемое имя: '").append(displayedName).append("'.");
             }
+        } else {
+            log.log(Level.getLevel(LogLevel.STRANGE.getValue()), "User {} is trying to set taken name '{}'",
+                    user.getId(), displayedName);
+            sb.append("Имя ").append(displayedName).append(" уже используется! Выберите другое имя!");
         }
+        message.setText(sb.toString());
+        execute(absSender, message, user);
     }
 
     private String getName(String[] strings) {
+        if (strings == null || strings.length == 0) {
+            return null;
+        }
+        String name = String.join(" ", strings);
+        return name.replaceAll(" ", "").isEmpty() ? null : name;
     }
 }

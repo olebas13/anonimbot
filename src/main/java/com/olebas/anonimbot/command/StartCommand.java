@@ -30,7 +30,7 @@ public class StartCommand extends AnonymizerCommand {
         if (mAnonymouses.addAnonymous(new Anonymous(user, chat))) {
             log.info("User {} is trying to execute '{}' the first time. Added to users' list.", user.getId(), getCommandIdentifier());
             sb.append("Привет, ").append(user.getUserName()).append("! Вы был добавлены в список пользователей бота!\n")
-                    .append("Пожалуйста, выполните команду:\n'/set_name <отображаемое_имя>'\nгде &lt;отображаемое_имя&gt; " +
+                    .append("Пожалуйста, выполните команду:\n'/set_name <отображаемое_имя>'\nгде <отображаемое_имя> " +
                             "это имя, которое вы хотите использовать, чтобы скрыть свое настоящее имя.");
         } else {
             log.log(Level.getLevel(LogLevel.STRANGE.getValue()),

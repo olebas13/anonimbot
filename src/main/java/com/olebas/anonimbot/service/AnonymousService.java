@@ -45,7 +45,7 @@ public final class AnonymousService {
         return anonymous.getDisplayedName();
     }
 
-    public Stream<Anonymous> anonimouses() {
+    public Stream<Anonymous> anonymouses() {
         return mAnonymouses.stream();
     }
 
